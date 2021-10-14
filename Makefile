@@ -25,6 +25,9 @@
 playground-build:
 	yarn workspace playground run build
 
+playground-start:
+	yarn workspace playground run start
+
 playground-clean:
 	yarn workspace playground run clean
 
@@ -33,6 +36,9 @@ playground-install:
 
 playground-test:
 	yarn workspace playground run test
+
+playground-test-watch:
+	yarn workspace playground run test:watch
 
 playground-bundlesize:
 	yarn workspace playground run bundlesize
