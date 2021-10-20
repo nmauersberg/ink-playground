@@ -18,19 +18,9 @@
 //! In order to ease testing, the service is parameterized by a compile
 //! strategy. This allows easy mocking.
 
-use actix_web::{
-    web::Json,
-    HttpResponse,
-    Responder,
-};
-use serde::{
-    Deserialize,
-    Serialize,
-};
-use ts_rs::{
-    export,
-    TS,
-};
+use actix_web::{web::Json, HttpResponse, Responder};
+use serde::{Deserialize, Serialize};
+use ts_rs::{export, TS};
 
 // -------------------------------------------------------------------------------------------------
 // TYPES
@@ -67,7 +57,9 @@ export! {
 /// The actual dockerized compilation will happen in here.
 pub const COMPILE_SANDBOXED: CompileStrategy = |req| {
     // TODO: implement!
-    CompilationResult::Success { result: req.source }
+    CompilationResult::Success {
+        result: format!("Compiled: {}", req.source),
+    }
 };
 
 pub async fn route_compile(
@@ -90,11 +82,7 @@ pub async fn route_compile(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use actix_web::{
-        test,
-        web,
-        App,
-    };
+    use actix_web::{test, web, App};
 
     /// A compile strategy mock. Accepts only `foo` as "correct" source code.
     const COMPILE_MOCKED: CompileStrategy = |req| {
