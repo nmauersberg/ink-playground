@@ -82,6 +82,9 @@ crate-playground-test: crate-playground-test-firefox
 rust-check-format:
 	cargo fmt --all -- --check
 
+rust-format:
+	cargo fmt --all -- --emit files
+
 rust-clean:
 	rm -rf target
 
