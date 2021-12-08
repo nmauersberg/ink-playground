@@ -189,14 +189,20 @@ class TokenState {
 
 function fixTag(tag: string) {
   switch (tag) {
+    case 'field':
+      return 'variable';
     case 'builtin':
       return 'variable.predefined';
     case 'attribute':
+    case 'builtin_attr':
       return 'key';
     case 'builtin_type':
     case 'self_type':
     case 'bool_literal':
+    case 'struct':
       return 'keyword';
+    case 'brace':
+      return 'token.type';
     case 'value_param':
       return 'value';
     case 'string_literal':
@@ -209,6 +215,36 @@ function fixTag(tag: string) {
       return tag;
   }
 }
+
+/*
+#comment
+none
+#attribute
+builtin_attr
+parenthesis
+operator
+#string_literal
+comma
+keyword
+module
+semicolon
+brace
+struct
+#field
+colon
+#builtin_type
+function
+#value_param
+self_type
+trait
+self_keyword
+logical
+punctuation
+variable
+unresolved_reference
+#macro
+#bool_literal
+*/
 
 export const setTokens = (allTokens: Token[]) =>
   monaco.languages.setTokensProvider(modeId, {
